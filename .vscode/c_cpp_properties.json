@@ -1,0 +1,39 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/",
+                "${workspaceFolder}/usb",
+                "${workspaceFolder}/library",
+                "C:\\Keil_v5\\C251\\INC",
+                "c:\\Keil_v5\\C251\\INC\\STC"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "__SATIC_INLINE=static",
+                "sbit=char",
+                "sfr=char",
+                "bit=char",
+                "data=",
+                "idata=",
+                "bdata=",
+                "pdata=",
+                "xdata=",
+                "edata=",
+                "code=",
+                "interrupt=",
+                "far=",
+                "INT0_VECTOR="
+            ],
+            "windowsSdkVersion": "10.0.22621.0",
+            "compilerPath": "cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}
