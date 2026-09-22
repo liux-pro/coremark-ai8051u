@@ -31,7 +31,7 @@
 	e.g. Read value from on board RTC, read value from cpu clock cycles performance counter etc. 
 	Sample implementation for standard time.h and windows.h definitions included.
 */
-extern uint32_t lovely_timer;
+extern unsigned long lovely_timer;
 
 CORETIMETYPE barebones_clock() {
 	// #error "You must implement a method to measure time in barebones_clock()! This function should return current time.\n"
@@ -47,7 +47,8 @@ CORETIMETYPE barebones_clock() {
 #define MYTIMEDIFF(fin,ini) ((fin)-(ini))
 #define TIMER_RES_DIVIDER 1
 #define SAMPLE_TIME_IMPLEMENTATION 1
-#define EE_TICKS_PER_SEC (CLOCKS_PER_SEC / TIMER_RES_DIVIDER)
+// ¶¨Ê±Æ÷0 10ms
+#define EE_TICKS_PER_SEC 100
 
 /** Define Host specific (POSIX), or target specific global time variables. */
 static CORETIMETYPE start_time_val, stop_time_val;

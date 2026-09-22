@@ -75,7 +75,7 @@ typedef unsigned short ee_u16;
 typedef signed int ee_s32;
 typedef double ee_f32;
 typedef unsigned char ee_u8;
-typedef unsigned int ee_u32;
+typedef unsigned long ee_u32;
 typedef ee_u32 ee_ptr_int;
 typedef size_t ee_size_t;
 #define NULL ((void *)0)
@@ -111,7 +111,7 @@ typedef ee_u32 CORE_TICKS;
 	MEM_STACK - to allocate the data block on the stack (NYI).
 */
 #ifndef MEM_METHOD
-#define MEM_METHOD MEM_STACK
+#define MEM_METHOD MEM_STATIC
 #endif
 
 /* Configuration : MULTITHREAD
