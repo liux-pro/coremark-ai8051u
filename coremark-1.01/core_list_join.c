@@ -60,15 +60,15 @@ list_head *core_list_insert_new(list_head *insert_point
 typedef ee_s32(*list_cmp)(list_data *a, list_data *b, core_results *res);
 list_head *core_list_mergesort(list_head *list, list_cmp cmp, core_results *res);
 
-ee_s16 calc_func(ee_s16 *pdata, core_results *res) {
-	ee_s16 data=*pdata;
+ee_s16 calc_func(ee_s16 *lovely_p_data, core_results *res) {
+	ee_s16 lovely_data=*lovely_p_data;
 	ee_s16 retval;
-	ee_u8 optype=(data>>7) & 1; /* bit 7 indicates if the function result has been cached */
+	ee_u8 optype=(lovely_data>>7) & 1; /* bit 7 indicates if the function result has been cached */
 	if (optype) /* if cached, use cache */
-		return (data & 0x007f);
+		return (lovely_data & 0x007f);
 	else { /* otherwise calculate and cache the result */
-		ee_s16 flag=data & 0x7; /* bits 0-2 is type of function to perform */
-		ee_s16 dtype=((data>>3) & 0xf); /* bits 3-6 is specific data for the operation */
+		ee_s16 flag=lovely_data & 0x7; /* bits 0-2 is type of function to perform */
+		ee_s16 dtype=((lovely_data>>3) & 0xf); /* bits 3-6 is specific data for the operation */
 		dtype |= dtype << 4; /* replicate the lower 4 bits to get an 8b value */
 		switch (flag) {
 			case 0:
@@ -84,12 +84,12 @@ ee_s16 calc_func(ee_s16 *pdata, core_results *res) {
 					res->crcmatrix=retval;
 				break;
 			default:
-				retval=data;
+				retval=lovely_data;
 				break;
 		}
 		res->crc=crcu16(retval,res->crc);
 		retval &= 0x007f; 
-		*pdata = (data & 0xff00) | 0x0080 | retval; /* cache the result */
+		*lovely_p_data = (lovely_data & 0xff00) | 0x0080 | retval; /* cache the result */
 		return retval;
 	}
 }
