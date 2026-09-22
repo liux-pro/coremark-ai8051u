@@ -7,6 +7,11 @@
 /* Topic : Description
 	This file contains configuration constants required to execute on different platforms
 */
+
+#ifndef CORE_DEBUG 
+#define CORE_DEBUG 0
+#endif
+
 #include "stdio.h"
 #ifndef CORE_PORTME_H
 #define CORE_PORTME_H
@@ -70,15 +75,15 @@
 	*Imprtant* :
 	ee_ptr_int needs to be the data type used to hold pointers, otherwise coremark may fail!!!
 */
-typedef signed short ee_s16;
-typedef unsigned short ee_u16;
-typedef signed int ee_s32;
-typedef double ee_f32;
+typedef signed int ee_s16;
+typedef unsigned int ee_u16;
+typedef signed long ee_s32;
+typedef float ee_f32;
 typedef unsigned char ee_u8;
 typedef unsigned long ee_u32;
 typedef ee_u32 ee_ptr_int;
-typedef size_t ee_size_t;
-#define NULL ((void *)0)
+typedef ee_u32 ee_size_t;
+// #define NULL ((void *)0)
 /* align_mem :
 	This macro is used to align an offset to point to a 32b value. It is used in the Matrix algorithm to initialize the input memory blocks.
 */
@@ -147,7 +152,7 @@ typedef ee_u32 CORE_TICKS;
 	This flag only matters if MULTITHREAD has been defined to a value greater then 1.
 */
 #ifndef MAIN_HAS_NOARGC 
-#define MAIN_HAS_NOARGC 0
+#define MAIN_HAS_NOARGC 1
 #endif
 
 /* Configuration : MAIN_HAS_NORETURN
@@ -158,7 +163,7 @@ typedef ee_u32 CORE_TICKS;
 	1 - platform does not support returning a value from main
 */
 #ifndef MAIN_HAS_NORETURN
-#define MAIN_HAS_NORETURN 0
+#define MAIN_HAS_NORETURN 1
 #endif
 
 /* Variable : default_num_contexts
