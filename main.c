@@ -74,20 +74,14 @@ uint32_t lovely_timer=0;
 void Timer0_Isr(void) interrupt TMR0_VECTOR
 {
 	lovely_timer++;
-	if(lovely_timer%100==0){
-	     P00 = !P00;		//LED flip for each second
-	}
 }
-extern int core_main();
+
+extern void core_main();
 void main(void)
 {
 	WTST = 0;  // 设置程序指令延时参数，赋值为0可将CPU执行指令的速度设置为最快
 	EAXFR = 1; // 扩展寄存器(XFR)访问使能
 	CKCON = 0; // 提高访问XRAM速度
-
-	P0M1 = 0x00;   P0M0 = 0xff;   //设置P0为推挽输出 实验箱流水灯对应io
-    P4M1 = 0x00;   P4M0 = 0x80;   //设置为准双向口
-    P40 = 0; // 实验箱流水灯供电开关
 
 	uart_init();
 	usb_init();
@@ -107,10 +101,11 @@ void main(void)
 	ET0 = 1;				//使能定时器0中断
 }
 
-P02=0;
-delay_ms(3000);
-printf("%d",core_main());
-P03=0;
+printf("start\n");
+core_main();
+printf("end\n");
+
+
 
 	while (1)
 	{
@@ -118,7 +113,6 @@ P03=0;
 		{
 			checkISP();
 			uart_recv_done(); // 对接收的数据处理完成后,一定要调用一次这个函数,以便CDC接收下一笔串口数据
-      printf("%.*s", RxCount, RxBuffer);
 		}
 	}
 }

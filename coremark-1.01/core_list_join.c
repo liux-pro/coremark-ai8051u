@@ -465,9 +465,15 @@ list_head *core_list_mergesort(list_head *list, list_cmp cmp, core_results *res)
 				       arguments: "error C62: actual parameters must fit into
 				       registers". Dispatch to a direct call instead; the compare
 				       function is still the one the caller selected. */
-				    ee_s32 cres = (cmp == cmp_idx)
-				                ? cmp_idx(p->info,q->info,res)
-				                : cmp_complex(p->info,q->info,res);
+				    ee_s32 cres;
+
+				    if (cmp == cmp_idx)
+				        /* caller asked for the idx compare */
+				        cres = cmp_idx(p->info,q->info,res);
+				    else
+				        /* caller asked for the complex compare */
+				        cres = cmp_complex(p->info,q->info,res);
+
 				    if (cres <= 0) {
 				        /* First element of p is lower (or same); e must come from p. */
 				        e = p; p = p->next; psize--;
