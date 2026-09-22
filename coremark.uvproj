@@ -272,7 +272,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>library,usb,lcd,TinyMaix</IncludePath>
+              <IncludePath>library,usb,coremark-1.01</IncludePath>
             </VariousControls>
           </C251>
           <Ax51>
@@ -443,6 +443,51 @@
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\library\delay.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>coremark-1.01</GroupName>
+          <Files>
+            <File>
+              <FileName>core_list_join.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\coremark-1.01\core_list_join.c</FilePath>
+            </File>
+            <File>
+              <FileName>core_main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\coremark-1.01\core_main.c</FilePath>
+            </File>
+            <File>
+              <FileName>core_matrix.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\coremark-1.01\core_matrix.c</FilePath>
+            </File>
+            <File>
+              <FileName>core_state.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\coremark-1.01\core_state.c</FilePath>
+            </File>
+            <File>
+              <FileName>core_util.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\coremark-1.01\core_util.c</FilePath>
+            </File>
+            <File>
+              <FileName>coremark.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\coremark-1.01\coremark.h</FilePath>
+            </File>
+            <File>
+              <FileName>core_portme.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\coremark-1.01\core_portme.c</FilePath>
+            </File>
+            <File>
+              <FileName>core_portme.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\coremark-1.01\core_portme.h</FilePath>
             </File>
           </Files>
         </Group>
