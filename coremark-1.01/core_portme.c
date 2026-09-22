@@ -23,15 +23,19 @@
 	volatile ee_s32 seed2_volatile=0x8;
 	volatile ee_s32 seed3_volatile=0x8;
 #endif
-	volatile ee_s32 seed4_volatile=ITERATIONS;
+	// volatile ee_s32 seed4_volatile=ITERATIONS;
+	volatile ee_s32 seed4_volatile=999;
 	volatile ee_s32 seed5_volatile=0;
 /* Porting : Timing functions
 	How to capture time and convert to seconds must be ported to whatever is supported by the platform.
 	e.g. Read value from on board RTC, read value from cpu clock cycles performance counter etc. 
 	Sample implementation for standard time.h and windows.h definitions included.
 */
+extern uint32_t lovely_timer;
+
 CORETIMETYPE barebones_clock() {
-	#error "You must implement a method to measure time in barebones_clock()! This function should return current time.\n"
+	// #error "You must implement a method to measure time in barebones_clock()! This function should return current time.\n"
+	return lovely_timer;
 }
 /* Define : TIMER_RES_DIVIDER
 	Divider to trade off timer resolution and total time that can be measured.

@@ -54,7 +54,15 @@ char putchar(char c)
 }
 
 
-
+//10ms自增1
+uint32_t lovely_timer=0;
+void Timer0_Isr(void) interrupt TMR0_VECTOR
+{
+	lovely_timer++;
+	if(lovely_timer%100==0){
+	     P00 != P00;		//LED flip for each second
+	}
+}
 
 void main(void)
 {
@@ -62,6 +70,7 @@ void main(void)
 	EAXFR = 1; // 扩展寄存器(XFR)访问使能
 	CKCON = 0; // 提高访问XRAM速度
 
+	P0M1 = 0x00;   P0M0 = 0xff;   //设置P0为推挽输出
 
 	uart_init();
 	usb_init();
@@ -69,6 +78,17 @@ void main(void)
 
 
 
+//定时器0 10毫秒@40.000MHz
+{
+	TM0PS = 0x07;			//设置定时器时钟预分频 ( 注意:并非所有系列都有此寄存器,详情请查看数据手册 )
+	AUXR |= 0x80;			//定时器时钟1T模式
+	TMOD &= 0xF0;			//设置定时器模式
+	TL0 = 0xB0;				//设置定时初始值
+	TH0 = 0x3C;				//设置定时初始值
+	TF0 = 0;				//清除TF0标志
+	TR0 = 1;				//定时器0开始计时
+	ET0 = 1;				//使能定时器0中断
+}
 
 
 
