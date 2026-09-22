@@ -444,6 +444,11 @@
               <FileType>1</FileType>
               <FilePath>.\library\delay.c</FilePath>
             </File>
+            <File>
+              <FileName>MDU32_C251.LIB</FileName>
+              <FileType>4</FileType>
+              <FilePath>.\library\MDU32_C251.LIB</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
