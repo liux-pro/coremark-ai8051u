@@ -4,6 +4,7 @@
 #include "usb.h"
 #include "uart.h"
 #include <string.h>
+#include "stdarg.h"
 
 #include "coremark.h"
 
@@ -53,6 +54,20 @@ char putchar(char c)
 	return c;
 }
 
+/* ============================================================
+ * 输出接口：HAS_PRINTF == 0，需自行实现 ee_printf
+ * ============================================================ */
+int ee_printf(const char *fmt, ...)
+{
+    va_list ap;
+    int len;
+
+    va_start(ap, fmt);
+    len = vprintf(fmt, ap);   /* 直接转发给 vprintf */
+    va_end(ap);
+
+    return len;
+}
 
 //10ms自增1
 uint32_t lovely_timer=0;
@@ -60,7 +75,7 @@ void Timer0_Isr(void) interrupt TMR0_VECTOR
 {
 	lovely_timer++;
 	if(lovely_timer%100==0){
-	     P00 != P00;		//LED flip for each second
+	     P00 = !P00;		//LED flip for each second
 	}
 }
 
@@ -70,7 +85,9 @@ void main(void)
 	EAXFR = 1; // 扩展寄存器(XFR)访问使能
 	CKCON = 0; // 提高访问XRAM速度
 
-	P0M1 = 0x00;   P0M0 = 0xff;   //设置P0为推挽输出
+	P0M1 = 0x00;   P0M0 = 0xff;   //设置P0为推挽输出 实验箱流水灯对应io
+    P4M1 = 0x00;   P4M0 = 0x80;   //设置为准双向口
+    P40 = 0; // 实验箱流水灯供电开关
 
 	uart_init();
 	usb_init();
@@ -90,7 +107,10 @@ void main(void)
 	ET0 = 1;				//使能定时器0中断
 }
 
-
+P02=0;
+delay_ms(3000);
+printf("%d",core_main());
+P03=0;
 
 	while (1)
 	{
