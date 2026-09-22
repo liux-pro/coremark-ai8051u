@@ -22,7 +22,7 @@
 	Define to 1 if the platform supports floating point.
 */
 #ifndef HAS_FLOAT 
-#define HAS_FLOAT 0
+#define HAS_FLOAT 1
 #endif
 /* Configuration : HAS_TIME_H
 	Define to 1 if platform has the time.h header file,
@@ -59,14 +59,14 @@
  #ifdef __GNUC__
  #define COMPILER_VERSION "GCC"__VERSION__
  #else
- #define COMPILER_VERSION "Please put compiler version here (e.g. gcc 4.1)"
+ #define COMPILER_VERSION "Keil C251 V5.60.0.0"
  #endif
 #endif
 #ifndef COMPILER_FLAGS 
- #define COMPILER_FLAGS "keil COMPILER_FLAGS todo" /* "Please put compiler flags here (e.g. -o3)" */
+ #define COMPILER_FLAGS "OPTIMIZE(9, SPEED)" /* "Please put compiler flags here (e.g. -o3)" */
 #endif
 #ifndef MEM_LOCATION 
- #define MEM_LOCATION "STACK"
+ #define MEM_LOCATION "xdata"
 #endif
 
 /* Data Types :

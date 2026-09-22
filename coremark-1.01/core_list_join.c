@@ -460,12 +460,21 @@ list_head *core_list_mergesort(list_head *list, list_cmp cmp, core_results *res)
 				} else if (qsize == 0 || !q) {
 				    /* q is empty; e must come from p. */
 				    e = p; p = p->next; psize--;
-				} else if (cmp(p->info,q->info,res) <= 0) {
-				    /* First element of p is lower (or same); e must come from p. */
-				    e = p; p = p->next; psize--;
 				} else {
-				    /* First element of q is lower; e must come from q. */
-				    e = q; q = q->next; qsize--;
+				    /* Keil C251 cannot emit an indirect call with these 3 pointer
+				       arguments: "error C62: actual parameters must fit into
+				       registers". Dispatch to a direct call instead; the compare
+				       function is still the one the caller selected. */
+				    ee_s32 cres = (cmp == cmp_idx)
+				                ? cmp_idx(p->info,q->info,res)
+				                : cmp_complex(p->info,q->info,res);
+				    if (cres <= 0) {
+				        /* First element of p is lower (or same); e must come from p. */
+				        e = p; p = p->next; psize--;
+				    } else {
+				        /* First element of q is lower; e must come from q. */
+				        e = q; q = q->next; qsize--;
+				    }
 				}
 
 		        /* add the next element to the merged list */
